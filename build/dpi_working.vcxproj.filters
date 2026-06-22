@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\admin\Desktop\Packet_analyzer-main\src\main_working.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\admin\Desktop\Packet_analyzer-main\src\pcap_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\admin\Desktop\Packet_analyzer-main\src\packet_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\admin\Desktop\Packet_analyzer-main\src\sni_extractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\admin\Desktop\Packet_analyzer-main\src\types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\admin\Desktop\Packet_analyzer-main\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{637E559D-919E-3BBF-A7F0-6101445961E2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,3 @@
+C:/Users/admin/Desktop/Packet_analyzer-main/out/build/x64-Debug/CMakeFiles/packet_analyzer.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

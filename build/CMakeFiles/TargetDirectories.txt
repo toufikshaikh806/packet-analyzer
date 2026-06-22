@@ -1,0 +1,6 @@
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/packet_analyzer.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/dpi_simple.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/dpi_working.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/dpi_mt.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/admin/Desktop/Packet_analyzer-main/build/CMakeFiles/ZERO_CHECK.dir
