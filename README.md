@@ -1,4 +1,4 @@
-# DPI Engine - Deep Packet Inspection System
+0# DPI Engine - Deep Packet Inspection System
 
 
 This document explains **everything** about this project - from basic networking concepts to the complete code architecture. After reading this, you should understand exactly how packets flow through the system without needing to read the code.
@@ -862,135 +862,117 @@ Connection to YouTube:
 
 ---
 
-## 10. Building and Running
+# 🚀 Deep Packet Inspection (DPI) Engine
 
-### Prerequisites
+A high-performance **Deep Packet Inspection (DPI)** engine built in
+**C++** that analyzes network traffic from PCAP files, identifies
+applications using TLS SNI, applies filtering rules, and generates
+traffic statistics.
 
-- **macOS/Linux** with C++17 compiler
-- **g++** or **clang++**
-- No external libraries needed!
+## ✨ Features
 
-### Build Commands
+-   📦 PCAP file parsing
+-   🔍 Deep Packet Inspection (DPI)
+-   🌐 TLS SNI extraction
+-   🎯 Application identification (YouTube, Google, Facebook, etc.)
+-   🚫 Rule-based application and domain blocking
+-   🔄 Connection tracking using Five-Tuple
+-   ⚡ Multi-threaded packet processing
+-   📊 Traffic statistics and reporting
+-   💾 Filtered PCAP output generation
 
-**Simple Version:**
-```bash
-g++ -std=c++17 -O2 -I include -o dpi_simple \
-    src/main_working.cpp \
-    src/pcap_reader.cpp \
-    src/packet_parser.cpp \
-    src/sni_extractor.cpp \
-    src/types.cpp
+## 🛠️ Technologies Used
+
+-   C++
+-   CMake
+-   Multithreading
+-   PCAP Processing
+-   STL
+-   Network Programming
+
+## 📂 Project Structure
+
+``` text
+include/
+src/
+test_dpi.pcap
+CMakeLists.txt
+README.md
 ```
 
-**Multi-threaded Version:**
-```bash
-g++ -std=c++17 -pthread -O2 -I include -o dpi_engine \
-    src/dpi_mt.cpp \
-    src/pcap_reader.cpp \
-    src/packet_parser.cpp \
-    src/sni_extractor.cpp \
-    src/types.cpp
+## ⚙️ Build
+
+``` bash
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
 ```
 
-### Running
+## ▶️ Run
 
-**Basic usage:**
-```bash
-./dpi_engine test_dpi.pcap output.pcap
+``` bash
+./dpi_mt input.pcap output.pcap
 ```
 
-**With blocking:**
-```bash
-./dpi_engine test_dpi.pcap output.pcap \
-    --block-app YouTube \
-    --block-app TikTok \
-    --block-ip 192.168.1.50 \
-    --block-domain facebook
+Example with blocking:
+
+``` bash
+./dpi_mt input.pcap output.pcap --block-app YouTube
 ```
 
-**Configure threads (multi-threaded only):**
-```bash
-./dpi_engine input.pcap output.pcap --lbs 4 --fps 4
-# Creates 4 LB threads × 4 FP threads = 16 processing threads
+## 🔄 Workflow
+
+``` text
+Input PCAP
+     │
+     ▼
+Read Packets
+     │
+     ▼
+Parse Network Headers
+     │
+     ▼
+Extract TLS SNI
+     │
+     ▼
+Identify Application
+     │
+     ▼
+Apply Blocking Rules
+     │
+     ▼
+Generate Statistics
+     │
+     ▼
+Output PCAP
 ```
 
-### Creating Test Data
+## 📊 Example Capabilities
 
-```bash
-python3 generate_test_pcap.py
-# Creates test_dpi.pcap with sample traffic
-```
+-   Detect YouTube traffic
+-   Detect Google traffic
+-   Detect Facebook traffic
+-   Block selected applications
+-   Block specific domains
+-   Track network connections
+-   Generate processing reports
 
----
+## 🎯 Purpose
 
-## 11. Understanding the Output
+This project demonstrates concepts of:
 
-### Sample Output
+-   Deep Packet Inspection
+-   Computer Networks
+-   Network Security
+-   Traffic Analysis
+-   Multi-threaded Programming
+-   High-performance Packet Processing
 
-```
-╔══════════════════════════════════════════════════════════════╗
-║              DPI ENGINE v2.0 (Multi-threaded)                 ║
-╠══════════════════════════════════════════════════════════════╣
-║ Load Balancers:  2    FPs per LB:  2    Total FPs:  4        ║
-╚══════════════════════════════════════════════════════════════╝
+## 👨‍💻 Author
 
-[Rules] Blocked app: YouTube
-[Rules] Blocked IP: 192.168.1.50
+**Toufik Shaikh**
 
-[Reader] Processing packets...
-[Reader] Done reading 77 packets
-
-╔══════════════════════════════════════════════════════════════╗
-║                      PROCESSING REPORT                        ║
-╠══════════════════════════════════════════════════════════════╣
-║ Total Packets:                77                              ║
-║ Total Bytes:                5738                              ║
-║ TCP Packets:                  73                              ║
-║ UDP Packets:                   4                              ║
-╠══════════════════════════════════════════════════════════════╣
-║ Forwarded:                    69                              ║
-║ Dropped:                       8                              ║
-╠══════════════════════════════════════════════════════════════╣
-║ THREAD STATISTICS                                             ║
-║   LB0 dispatched:             53                              ║
-║   LB1 dispatched:             24                              ║
-║   FP0 processed:              53                              ║
-║   FP1 processed:               0                              ║
-║   FP2 processed:               0                              ║
-║   FP3 processed:              24                              ║
-╠══════════════════════════════════════════════════════════════╣
-║                   APPLICATION BREAKDOWN                       ║
-╠══════════════════════════════════════════════════════════════╣
-║ HTTPS                39  50.6% ##########                     ║
-║ Unknown              16  20.8% ####                           ║
-║ YouTube               4   5.2% # (BLOCKED)                    ║
-║ DNS                   4   5.2% #                              ║
-║ Facebook              3   3.9%                                ║
-║ ...                                                           ║
-╚══════════════════════════════════════════════════════════════╝
-
-[Detected Domains/SNIs]
-  - www.youtube.com -> YouTube
-  - www.facebook.com -> Facebook
-  - www.google.com -> Google
-  - github.com -> GitHub
-  ...
-```
-
-### What Each Section Means
-
-| Section | Meaning |
-|---------|---------|
-| Configuration | Number of threads created |
-| Rules | Which blocking rules are active |
-| Total Packets | Packets read from input file |
-| Forwarded | Packets written to output file |
-| Dropped | Packets blocked (not written) |
-| Thread Statistics | Work distribution across threads |
-| Application Breakdown | Traffic classification results |
-| Detected SNIs | Actual domain names found |
-
----
 
 ## 12. Extending the Project
 
